@@ -1,14 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Vuetify in Your first Vue App"/>
+  <v-app>
+    <NavbarComponent/>
+    <HelloWorld msg="Welcome to my first Vue app"/>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import NavbarComponent from './layouts/NavbarComponent.vue';
 
 export default {
   name: 'App',
   components: {
+    NavbarComponent,
     HelloWorld
   }
 }
