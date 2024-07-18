@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'App',
 
@@ -29,7 +30,6 @@ export default {
   data() { // define the default value of the state
     return{
       isDark: false,
-      text: ''
     }
   },
   watch: { // monitor specific state with same name of function
@@ -42,7 +42,14 @@ export default {
     writeText() {
       this.text = 'Nice to meet you.'
     }
+  },
+  setup() {
+    const text = ref('')
+    return {
+      text
+    }
   }
+  
 };
 </script>
 
