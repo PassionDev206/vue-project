@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <NavbarComponent/>
-    <HelloWorld msg="Welcome to my first Vue app"/>
+    <HelloWorld message="Welcome to my first Vue app"/>
   </v-app>
 </template>
 
