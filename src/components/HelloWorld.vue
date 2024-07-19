@@ -2,76 +2,46 @@
   <v-app :dark="isDark">
     <v-main>
       <v-container>
-        <v-switch v-model="isDark" label="Dark Mode"></v-switch>
-        <v-row>
-          <v-col>
-            <v-btn color="secondary" v-on:click="increament">{{ state.count }}</v-btn>
-            <v-btn color="primary" v-on:click="writeText">Primary Button</v-btn>
-            <v-btn color="accent" @click="state.cnt++">{{ state.cnt }}</v-btn>
-          </v-col>
-          <v-col>
-            <h2>{{ state.text }}</h2>
-            <p>{{ msg }}</p>
-          </v-col>
-        </v-row>
-
-        
+        <h1>Now is: {{ now }}</h1>
+        <p>
+          Has published books:
+        </p>
+        <span>
+          {{ publishedBookMessage }}
+        </span>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
-<script>
-import { reactive } from "vue";
-export default {
-  
-  name: "App",
-  
-  props: {
-    msg: String,
-  },
-  
-  data() {
-    // define the default value of the state
-    return {
-      isDark: false,
-    };
-  },
-  watch: {
-    // monitor specific state with same name of function
-    isDark(value) {
-      console.log(this.isDark);
-      this.$vuetify.theme.dark = value;
-    },
-  },
+<script setup>
+import { reactive, computed } from 'vue';
+const author = reactive({
+  name:  'John',
+  books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+  ]
+});
 
-  setup() {
-    const state = reactive({
-      count: 0,
-      text: '',
-      cnt:0
-    })
-    
-    function increament() {
-      state.count++
-    }
+const now = computed(() => {
+  const timestamp = Math.floor(Date.now())
+  const date = new Date(timestamp * 1000)
 
-    function increase() {
-      state.cnt++
-    }
+  return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+})
 
-    function writeText() {
-      state.text = "Hello world!"
-    }
-
-    return {
-      state,
-      increament,
-      increase,
-      writeText
-    }
-  },
-};
+const publishedBookMessage = computed(() => {
+  return author.books.length > 0 ? 'Yes' : 'No'
+})
 </script>
 
 <style>
